@@ -1,29 +1,29 @@
 const prisma = require("../prisma/client");
 const { validateInsert, validateUpdate } = require("../utils/validators");
 
-const getAllhandphoneiphone = async () => {
-    const handphoneRespons = await prisma.iphone.findMany();
-    return { handphone: handphoneRespons};
+const getAllHandphoneIphone = async () => {
+    const handphonesRespons = await prisma.iphone.findMany();
+    return { handphones: handphonesRespons};
 };
 
-const getAllhandphoneoppo = async () => {
-    const handphoneRespons = await prisma.oppo.findMany();
-    return { handphone: handphoneRespons};
+const getAllHandphoneOppo = async () => {
+    const handphonesRespons = await prisma.oppo.findMany();
+    return { handphones: handphonesRespons};
 };
 
-const getAllhandphonevivo = async () => {
-    const handphoneRespons = await prisma.vivo.findMany();
-    return { handphone: handphoneRespons};
+const getAllHandphoneVivo = async () => {
+    const handphonesRespons = await prisma.vivo.findMany();
+    return { handphones: handphonesRespons};
 };
 
-const getAllhandphonexiomi = async () => {
-    const handphoneRespons = await prisma.xiomi.findMany();
-    return { handphone: handphoneRespons};
+const getAllHandphoneXiomi = async () => {
+    const handphonesRespons = await prisma.xiomi.findMany();
+    return { handphones: handphonesRespons};
 };
 
-const getAllhandphonepoco = async () => {
-    const handphoneRespons = await prisma.poco.findMany();
-    return { handphone: handphoneRespons};
+const getAllHandphonePoco = async () => {
+    const handphonesRespons = await prisma.poco.findMany();
+    return { handphones: handphonesRespons};
 };
 
 const insertHandphone = async (
@@ -74,11 +74,11 @@ const deleteHandphone = async (brand, id) => {
 };
 
 module.exports = {
-    getAllhandphoneiphone,
-    getAllhandphoneoppo,
-    getAllhandphonevivo,
-    getAllhandphonexiomi,
-    getAllhandphonepoco,
+    getAllHandphoneIphone,
+    getAllHandphoneOppo,
+    getAllHandphoneVivo,
+    getAllHandphoneXiomi,
+    getAllHandphonePoco,
     insertHandphone,
     updateHandphone,
     deleteHandphone,

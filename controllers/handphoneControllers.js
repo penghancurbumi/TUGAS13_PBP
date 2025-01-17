@@ -1,61 +1,61 @@
 const { message } = require("statuses");
-const handphoneservice = require("../services/handphoneservice")
+const handphoneService = require("../services/handphoneService")
 
-const getiphone = async (req, res, next) => {
+const getIphone = async (req, res, next) => {
     try {
-        const handphones = await handphoneservice.getAllhandphoneiphone();
+        const handphones = await handphoneService.getAllHandphoneIphone();
         res.status(200).json({message:"handphone berhasil diambil", handphones});
     }catch (error) {
         next(error);
     }
 };
-const getoppo = async (req, res, next) => {
+const getOppo = async (req, res, next) => {
     try { 
-        const handphones = await handphoneservice.getAllhandphoneoppo();
+        const handphones = await handphoneService.getAllHandphoneOppo();
         res.status(200).json({message:"handphone berhasil diambil",handphones});
     }catch (error) {
         next(error);
     }
 };
-const getvivo = async (req, res, next) => {
+const getVivo = async (req, res, next) => {
     try{
-        const handphones = await handphoneservice.getAllhandphonevivo();
+        const handphones = await handphoneService.getAllHandphoneVivo();
         res.status(200).json({message:"handphone berhasil diambil",handphones});
     }catch (error) {
         next(error);
     }
 };
-const getxiomi = async (req, res, next) => {
+const getXiomi = async (req, res, next) => {
     try {
-        const handphones = await handphoneservice.getAllhandphonexiomi();
+        const handphones = await handphoneService.getAllHandphoneXiomi();
         res.status(200).json({message:"handphone berhasil diambil", handphones});
     }catch (error) {
         next(error);
     }
 };
-const getpoco = async (req, res, next) => {
+const getPoco = async (req, res, next) => {
     try{
-        const handphones = await handphoneservice.getAllhandphonepoco();
+        const handphones = await handphoneService.getAllHandphonePoco();
         res.status(200).json({message:"handphone berhasil diambil",handphones});
     }catch (error) {
         next(error);
     }
 };
 
-const inserthandphone = async (req, res, next) => {
-    const store =req.params.store
+const insertHandphone = async (req, res, next) => {
+    const brand =req.params.brand
     const {nama, merek, spek, harga} = req.body;
 
     try {
-        const inserthandphone = await handphoneservice.inserthandphone(
+        const insertHandphone = await handphoneService.insertHandphone(
             nama,
             merek,
             spek,
             harga,
         );
         res.status(201).json({
-            message: "handphone berhasil di tambahkan ke store" + store,
-            inserthandphone
+            message: "handphone berhasil di tambahkan ke store" + brand,
+            insertHandphone 
         });
     } catch (error) {
         next(error);
@@ -64,20 +64,27 @@ const inserthandphone = async (req, res, next) => {
 
 const updateHandphone = async (req, res, next) => {
     const id = parseInt(req.params.id);
-    const store = req.params.store;
+    const brand = req.params.brand;
 
     const { nama, merek, spek, harga} = req.body
 
+    if (isNaN(id) || !id) {
+        return res.status(400).json({ error: "ID tidak valid" });
+    }
+   
     try{
-        const updateHandphone = await handphoneservice.updateHandphone(
+        const updatedHandphone = await handphoneService.updateHandphone(
             id,
-            store,
+            brand,
             nama,
             merek,
             spek,
             harga
         );
-    res.status(200).json({message:"Data handphone berhasil diupdate!"});
+    res.status(200).json({
+        message:"Data handphone berhasil diupdate!",
+        updatedHandphone
+    });
     }catch (error) {
         console.log(error);
         next(error);
@@ -86,22 +93,27 @@ const updateHandphone = async (req, res, next) => {
 
 const deleteHandphone = async (req, res, next) => {
     const id = parseInt(req.params.id);
-    const store = req.params.store;
+    const brand = req.params.brand;
+
+    if (isNaN(id) || !id) {
+        return res.status(400).json({ error: "ID tidak valid" });
+    }
+
     try{
-        const deleteuser = await handphoneservice.deleteHandphone(store, id);
-        res.status(200).json({message:"Data handphoone berhasil dihapus!"});
+        const deleteuser = await handphoneService.deleteHandphone(brand, id);
+        res.status(202).json({message:"Data handphoone berhasil dihapus!"});
     }catch (error) {
         next(error);
     }
 };
 
 module.exports ={
-    getiphone,
-    getoppo,
-    getvivo,
-    getxiomi,
-    getpoco,
-    inserthandphone,
+    getIphone,
+    getOppo,
+    getVivo,
+    getXiomi,
+    getPoco,
+    insertHandphone,
     updateHandphone,
     deleteHandphone,
 };

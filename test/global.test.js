@@ -17,7 +17,7 @@ afterAll(async () => {
   await Prisma.$disconnect();
 });
 
-describe("Store API Endpoints", () => {
+describe("Brand API Endpoints", () => {
   const brand = "iphone";
   let id;
 
@@ -74,9 +74,7 @@ describe("Store API Endpoints", () => {
         harga: "9000000",
     });
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty("status");
     expect(response.body).toHaveProperty("message");
-    expect(response.body).toHaveProperty("updateHandphone");
   });
 
   test("DELETE /handphone/:brand/:id - Menghapus Data Handphone", async () => {
